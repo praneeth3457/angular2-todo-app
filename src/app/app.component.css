@@ -1,0 +1,37 @@
+.todo {
+  margin : 30px;
+}
+.todo-title {
+  text-align: center;
+}
+.todo-list-title {
+  text-align: center;
+}
+.no-todos {
+  color: #a9a9a9;
+  font-size: 18px;
+  text-align: center;
+  margin-top: 20px;
+}
+.todo-list-table, .todo-list-table tr td, .todo-list-table tr th, .todo-list-table tr{
+  border: none;
+}
+.todo-info {
+  text-align: center;
+  font-weight: bold;
+}
+.todo-number {
+  font-size: 20px !important;
+  background-color: #242424 !important;
+}
+.todo-titles {
+  font-size: 24px;
+  font-weight: bold;
+  padding-left: 25px;
+}
+.todo-checkbox {
+  font-size: 24px;
+}
+.pull-right {
+  float: right;
+}
