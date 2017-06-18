@@ -13,8 +13,9 @@ export class AppComponent {
   completedTodos:number = 0;
   nCompletedTodos:number = 0;
   isBtn:number = 0;
+  dataPasseds = ['data from app-component', 'need data from pass-data component'];
 
-  addTodo = function(){
+  addTodo = function(newTodoTitle){
     let newTodo: Todo = new Todo();
     if(this.todos.length > 0){
       newTodo.id = this.todos[this.todos.length - 1].id + 1;
@@ -22,10 +23,10 @@ export class AppComponent {
       newTodo.id = this.todos.length + 1;
     }
 
-    newTodo.title = this.newTodoTitle;
+    newTodo.title = newTodoTitle.value;
     this.todos.push(newTodo);
     this.getTodoNumber();
-    this.newTodoTitle = '';
+    newTodoTitle.value = '';
   };
 
   toggleTodoComplete = function (todo : Todo) {
@@ -66,5 +67,14 @@ export class AppComponent {
     }
     this.getTodoNumber();
   };
+
+  onTodoData(data : {id : number, title : string, complete : boolean, event : string}){
+    let todo = {id : data.id, title : data.title, complete : data.complete};
+    if(data.event == 'toggle'){
+      this.toggleTodoComplete(todo);
+    } else {
+      this.deleteTodo(todo);
+    }
+  }
 
 }

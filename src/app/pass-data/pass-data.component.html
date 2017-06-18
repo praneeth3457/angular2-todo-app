@@ -1,0 +1,5 @@
+<div class="panel-body">
+  <input class="todo-checkbox" type="checkbox" (click)="toggleTodoComplete(passData)" [checked]="passData.complete">
+  <span class="todo-titles">{{passData.title}}</span>
+  <button *ngIf="isBtn == passData.id" type="button" class="btn btn-danger pull-right" (click)="deleteTodo(passData)">X</button>
+</div>

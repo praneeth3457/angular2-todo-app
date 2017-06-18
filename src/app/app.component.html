@@ -1,13 +1,15 @@
 <div class="container-fluid todo">
-  <h1 class="todo-title">TODO APP</h1>
+  <h1 class="todo-title" appStyleChange
+      [defaultBorder]="'#dbdbdb'" [hoverBorder]="'#242424'" [defaultBackgroundColor]="'#FBFBF7'" [hoverBackgroundColor]="'#F7F7D0'" [defaultColor]="'#AB3636'" [hoverColor]="'green'"
+  >TODO APP</h1>
   <div class="input-group input-group-lg col-xs-8 col-xs-offset-2">
-    <input type="text" class="form-control" placeholder="New todo item..." aria-describedby="sizing-addon1" autofocus="" [(ngModel)]="newTodoTitle" (keyup.enter)="addTodo()">
+    <input type="text" class="form-control" placeholder="New todo item..." aria-describedby="sizing-addon1" autofocus="" #newTodoTitle (keyup.enter)="addTodo(newTodoTitle)">
   </div>
   <hr>
   <div class="col-xs-12">
     <h3 class="todo-list-title">My todo list</h3>
-    <span class="no-todos col-xs-12" *ngIf="todos.length == 0">You don't have any todos!</span>
-    <div class="col-xs-12 col-md-8 col-md-offset-2" *ngIf="todos.length > 0">
+    <span class="no-todos col-xs-12" *appStructuralDir="todos.length == 0">You don't have any todos!</span>
+    <div class="col-xs-12 col-md-8 col-md-offset-2" *appStructuralDir="todos.length > 0">
       <div class="col-xs-12">
         <div class="todo-info alert alert-info col-xs-3">
           Total <span class="badge todo-number">{{totalTodos}}</span>
@@ -19,12 +21,22 @@
           Completed <span class="badge todo-number">{{completedTodos}}</span>
         </div>
       </div>
+      <!--
+      *** NOTE : this is one way of doing, keeping everything in one Component ***
+      -->
+      <!--<div class="panel col-xs-12" [ngClass]="{'panel-danger': !todo.complete, 'panel-success': todo.complete}" *ngFor="let todo of todos" (mouseenter) = "showBtn(todo)" (mouseleave) = "hideBtn(todo)">-->
+        <!--<div class="panel-body">-->
+          <!--<input class="todo-checkbox" type="checkbox" (click)="toggleTodoComplete(todo)" [checked]="todo.complete">-->
+          <!--<span class="todo-titles">{{todo.title}}</span>-->
+          <!--<button *ngIf="isBtn == todo.id" type="button" class="btn btn-danger pull-right" (click)="deleteTodo(todo)">X</button>-->
+        <!--</div>-->
+      <!--</div>-->
+
+      <!--
+      *** NOTE : this is other way of doing, keeping everything in different Component. This is the best way to do it because we can reuse wherever we want to use inside the application ***
+      -->
       <div class="panel col-xs-12" [ngClass]="{'panel-danger': !todo.complete, 'panel-success': todo.complete}" *ngFor="let todo of todos" (mouseenter) = "showBtn(todo)" (mouseleave) = "hideBtn(todo)">
-        <div class="panel-body">
-          <input class="todo-checkbox" type="checkbox" (click)="toggleTodoComplete(todo)" [checked]="todo.complete">
-          <span class="todo-titles">{{todo.title}}</span>
-          <button *ngIf="isBtn == todo.id" type="button" class="btn btn-danger pull-right" (click)="deleteTodo(todo)">X</button>
-        </div>
+        <app-pass-data [passData]="todo" [isBtn]="isBtn" (todoData)="onTodoData($event)"></app-pass-data>
       </div>
     </div>
   </div>

@@ -1,0 +1,11 @@
+.todo-titles {
+  font-size: 24px;
+  font-weight: bold;
+  padding-left: 25px;
+}
+.todo-checkbox {
+  font-size: 24px;
+}
+.pull-right {
+  float: right;
+}
